@@ -86,3 +86,22 @@ JWT Token will be added into Headers or Authorization (Bearer Token) of Postman
 1. create .gitignore file
 2. pip freeze > requirements.txt 
 3. others can install those libraries by typing "pip install -r requirements.txt"
+4. git add --all
+5. git commit -m "inital commit"
+6. // might have to provide user@email.com if it is our first time
+7. git branch -M main
+8. git remote add origin https://github.com/ma3332/fastapi.git
+9. git push -u origin main
+
+10. Change sth with our upload ....
+
+# Deploy application (HEROKU)
+
+1. get an account
+2. close all terminal
+3. install HEROKU: https://devcenter.heroku.com/articles/getting-started-with-python#set-up
+4. Reopen terminal and login: HEROKU login
+5. heroku create fastapi-tuananh // create a project, name of project is global -> once only
+6. git push heroku main // push code to heroku
+7. Create Procfile so that heroku knows what commands in order to run the application
+ 
