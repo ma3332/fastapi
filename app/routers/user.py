@@ -50,6 +50,37 @@ async def get_user(id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=schema.Token)
+def login(
+    user_credentials: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db),
+):
+    user = (
+        db.query(models.Users)
+        .filter(models.Users.email == user_credentials.username)
+        .first()
+    )
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"message": "not valid"},
+        )
+    if not verify(user_credentials.password, user.password):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"message": "not valid"},
+        )
+    # create JWT Token
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = oauth2.create_access_token(
+        data={"user_id": user.id}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
+
+"""
+# First Way
+# However, using this way, we cannot login from localhost:8000/docs, we can only login via postman with JWT added to header
+@router.post("/login", response_model=schema.Token)
 def login(user_credentials: schema.UserLogin, db: Session = Depends(get_db)):
     user = (
         db.query(models.Users)
@@ -72,7 +103,7 @@ def login(user_credentials: schema.UserLogin, db: Session = Depends(get_db)):
         data={"user_id": user.id}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
+"""
 
 """
 # Second Way
