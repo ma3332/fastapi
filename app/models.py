@@ -34,7 +34,7 @@ class Users(Base):
     created_at = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()")
     )
-    phone_number = Column(String, unique=True)
+    phone = Column(String)
 
 
 # Composite Key = combination of 2 primary keys

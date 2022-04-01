@@ -9,6 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # As we install alembic, we dont need this line anymore
 # From now, we will update our table in SQL from alembic
+# without alembic, we will run this line below, the purpose of this line code is to create a table in our SQL whenever
+# we create a new class in our Models
+# However, sqlalchemy orm cannot perform table migration
 
 # models.Base.metadata.create_all(bind=engine)
 
@@ -16,7 +19,7 @@ app = FastAPI()
 
 # origins = ["https://www.google.com"]
 
-# All domains can access our API
+# All domains can access our API, otherwise CORS will prevent domains from different sources access our API
 origins = ["*"]
 
 app.add_middleware(
