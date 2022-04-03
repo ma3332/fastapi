@@ -81,3 +81,24 @@ class TokenData(BaseModel):
 class Vote(BaseModel):
     post_id: int
     dir: int
+
+
+class CDPForm(BaseModel):
+    STT: int
+    depositor: str
+    amount: int
+    published: bool = False
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class CDPCreate(BaseModel):
+    depositor: str
+    amount: int
+    published: bool = False
+
+
+class CDPUpdate(BaseModel):
+    published: bool = False

@@ -10,11 +10,11 @@ router = APIRouter(prefix="/posts", tags=["Posts"])
 
 # response_model=List[schema....]: return a List of schema -> need to import List from typing lib
 @router.get("/", response_model=List[schema.PostwVoteCount])
-async def get_posts(
+async def get_posts_with_votes(
     db: Session = Depends(get_db),
 ):
     posts = db.query(models.PostForm).all()
-    # without "isouter=True", join is automatically set up as LEFT INNER JOIN
+    # without "isouter=True", "join" is automatically set up as LEFT INNER JOIN
     posts_votes_count = (
         db.query(models.PostForm, func.count(models.Votes.post_id).label("count_votes"))
         .join(models.Votes, models.Votes.post_id == models.PostForm.id, isouter=True)

@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import text
 
 # DB SQL Table Structure is presented as class <name> inherited from Base
 
-
+# primary_key = True -> SQLAlchemy will automatically set autoincrement=True
 class PostForm(Base):
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True, nullable=False)
@@ -45,4 +45,15 @@ class Votes(Base):
     )
     post_id = Column(
         Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key=True
+    )
+
+
+class CDP(Base):
+    __tablename__ = "cdp"
+    STT = Column(Integer, primary_key=True)
+    depositor = Column(String, nullable=False)
+    amount = Column(Integer, nullable=False)
+    published = Column(Boolean, server_default="False", nullable=False)
+    created_at = Column(
+        TIMESTAMP(timezone=True), nullable=False, server_default=text("NOW()")
     )
