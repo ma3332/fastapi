@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """fix CDP name
 
 Revision ID: fd4ae9ea1aec
