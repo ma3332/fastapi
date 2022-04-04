@@ -52,6 +52,8 @@ class CDP(Base):
     __tablename__ = "cdp"
     STT = Column(Integer, primary_key=True)
     depositor = Column(String, nullable=False)
+    depositor_pre = Column(String, nullable=False)
+    depositor_suf = Column(String, nullable=False)
     amount = Column(Integer, nullable=False)
     published = Column(Boolean, server_default="False", nullable=False)
     created_at = Column(

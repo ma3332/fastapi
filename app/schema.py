@@ -45,7 +45,7 @@ class PostResponse(PostForm):
 
 
 class PostwVoteCount(BaseModel):
-    PostForm: PostResponse
+    PostInfo: PostResponse
     count_votes: int
 
     class Config:
@@ -86,6 +86,8 @@ class Vote(BaseModel):
 class CDPForm(BaseModel):
     STT: int
     depositor: str
+    depositor_pre: str
+    depositor_suf: str
     amount: int
     published: bool = False
     created_at: datetime
@@ -96,6 +98,8 @@ class CDPForm(BaseModel):
 
 class CDPCreate(BaseModel):
     depositor: str
+    depositor_pre: str
+    depositor_suf: str
     amount: int
     published: bool = False
 
